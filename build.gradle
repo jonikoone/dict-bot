@@ -1,0 +1,25 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.4.21'
+    id 'application'
+    id 'maven'
+}
+
+group 'com.jonikoone'
+version '0.1'
+
+mainClassName='MainKt'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation 'com.github.kotlin-telegram-bot:kotlin-telegram-bot:6.0.1'
+}
+
+jar {
+    archiveBaseName="dict-tg-bot"
+    archiveVersion="0.1"
+}
