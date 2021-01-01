@@ -1,11 +1,15 @@
 buildscript {
     ext.kotlin_version = '1.4.21'
     ext.tg_bot_api = '6.0.1'
+    ext.exposedVersion = '0.29.1'
+    ext.junitJupiterVersion = '5.4.2'
+
     repositories {
         jcenter()
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "com.github.kotlin-telegram-bot:kotlin-telegram-bot:$tg_bot_api"
     }
 }
 
@@ -26,5 +30,38 @@ repositories {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    // tg bot api
     implementation "com.github.kotlin-telegram-bot:kotlin-telegram-bot:$tg_bot_api"
+
+    //log
+    implementation 'org.slf4j:slf4j-api:1.8.0-beta4'
+    implementation 'org.slf4j:slf4j-simple:1.8.0-beta4'
+
+    // exposed orm
+    implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
+    implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
+    implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
+    compile("org.xerial:sqlite-jdbc:3.34.0")
+
+
+    // testcontainers
+    testCompile "org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion"
+    testCompile "org.junit.jupiter:junit-jupiter-params:$junitJupiterVersion"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion"
+    testCompile "org.testcontainers:testcontainers:1.15.2"
+    testCompile "org.testcontainers:junit-jupiter:1.15.2"
 }
+
+/*
+mvp
+
+пользователь подключается к боту
+пользователь создает словарь
+пользователь добавляет слова в словарь
+пользователь может запустить обучение по словарю
+пользователь может запустить тест по случайной части словаря (дается слово, пользователь должен написать ответь)
+
+
+
+*/
