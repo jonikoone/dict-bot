@@ -1,0 +1,5 @@
+{
+  "name": "dict-bot",
+  "description": "Dict for learning ",
+  "addons": [ "heroku-postgresql" ]
+}

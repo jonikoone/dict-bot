@@ -1,25 +1,43 @@
-plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.4.21'
-    id 'application'
-    id 'maven'
+buildscript {
+    ext.kotlin_version = '1.4.21'
+    ext.tg_bot_api = '6.0.1'
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "com.github.kotlin-telegram-bot:kotlin-telegram-bot:$tg_bot_api"
+    }
 }
 
-group 'com.jonikoone'
-version '0.1'
+apply plugin: 'maven'
+apply plugin: 'idea'
+apply plugin: 'kotlin'
+apply plugin: 'application'
 
-mainClassName='MainKt'
+jar {
+    baseName = 'dict-bot'
+    version = '1.0'
+}
 
 repositories {
-    mavenCentral()
+    jcenter()
     maven { url 'https://jitpack.io' }
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib"
-    implementation 'com.github.kotlin-telegram-bot:kotlin-telegram-bot:6.0.1'
-}
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile 'org.springframework.boot:spring-boot-starter'
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-actuator'
+    compile('org.springframework.boot:spring-boot-starter-thymeleaf') {
+        exclude group: 'nz.net.ultraq.thymeleaf', module: 'thymeleaf-layout-dialect'
+    }
 
-jar {
-    archiveBaseName="dict-tg-bot"
-    archiveVersion="0.1"
+    compile 'org.postgresql:postgresql:9.4.1212'
+    compile 'com.zaxxer:HikariCP:2.6.0'
+    compile 'org.webjars:webjars-locator'
+    compile 'org.webjars:jquery:2.2.4'
+    compile 'org.webjars:jquery-ui:1.11.4'
+    compile 'org.webjars:bootstrap:3.3.6'
 }
